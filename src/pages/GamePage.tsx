@@ -76,7 +76,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
 
     setLoading(true);
     try {
-      const exists = true; //await validateWord(word);
+      const exists = await validateWord(word);
       if (!exists) {
         setError("Esa palabra no existe en el diccionario.");
         return;
