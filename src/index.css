@@ -66,9 +66,15 @@ input {
 }
 
 .btn-sun {
-  background-color: #fca31d;
-  color: #1a1000;
+  @apply bg-sun text-navy
 }
+
+.btn-base {
+  transition: all 0.15s;
+}
+.btn-base:hover { opacity: 0.9; }
+.btn-base:active { scale: 0.9; }
+.btn-base:disabled { opacity: 0.4; cursor: not-allowed; }
 
 ::-webkit-scrollbar {
   width: 6px;
