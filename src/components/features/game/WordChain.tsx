@@ -10,7 +10,7 @@ export function WordChain({ words }: WordChainProps) {
 
   return (
     <div className="mb-5">
-      <div className="text-[10px] text-muted uppercase tracking-widest mb-2">
+      <div className="text-xs text-muted uppercase tracking-widest mb-2">
         tu cadena — {words.length} {words.length === 1 ? "palabra" : "palabras"}
       </div>
       <div className="flex flex-wrap gap-2 items-end">
@@ -34,10 +34,10 @@ export function WordChain({ words }: WordChainProps) {
                   ))}
                 </div>
                 {wi < words.length - 1 && (
-                  <span className="text-border2 text-base">→</span>
+                  <span className="text-muted text-base">→</span>
                 )}
               </div>
-              <span className="text-[10px] text-muted pl-0.5">
+              <span className="text-xs text-muted pl-0.5">
                 +{entry.points}
               </span>
             </div>
