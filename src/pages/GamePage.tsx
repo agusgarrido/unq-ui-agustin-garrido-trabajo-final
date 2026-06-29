@@ -22,6 +22,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
   const [loading, setLoading] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
   const [finished, setFinished] = useState(false);
+  const timerSpeed = Math.max(400, 1000 - Math.floor(words.length / 10) * 200)
 
   const lastWord = words[words.length - 1] ?? null;
   const requiredLetter = lastWord ? lastLetter(lastWord.word) : null;
@@ -52,6 +53,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
   const { timeLeft, resetTimer, totalSeconds } = useGameTimer({
     onExpire: handleExpire,
     enabled: !finished,
+    speed: timerSpeed
   });
 
   const handleSubmit = useCallback(async () => {
@@ -74,7 +76,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
 
     setLoading(true);
     try {
-      const exists = await validateWord(word);
+      const exists = true; //await validateWord(word);
       if (!exists) {
         setError("Esa palabra no existe en el diccionario.");
         return;

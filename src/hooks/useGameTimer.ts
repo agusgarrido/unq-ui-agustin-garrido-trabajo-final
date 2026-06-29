@@ -5,9 +5,10 @@ const TURN_SECONDS = 15
 interface UseGameTimerOptions {
   onExpire: () => void
   enabled: boolean
+  speed?: number
 }
 
-export function useGameTimer({ onExpire, enabled }: UseGameTimerOptions) {
+export function useGameTimer({ onExpire, enabled, speed = 1000 }: UseGameTimerOptions) {
   const [timeLeft, setTimeLeft] = useState(TURN_SECONDS)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const onExpireRef = useRef(onExpire)
@@ -37,10 +38,10 @@ export function useGameTimer({ onExpire, enabled }: UseGameTimerOptions) {
         }
         return prev - 1
       })
-    }, 1000)
+    }, speed)
 
     return clearTimer
-  }, [enabled, clearTimer])
+  }, [enabled, clearTimer, speed])
 
   return { timeLeft, resetTimer, totalSeconds: TURN_SECONDS }
 }
