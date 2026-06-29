@@ -26,65 +26,32 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
   const lastWord = words[words.length - 1] ?? null;
   const requiredLetter = lastWord ? lastLetter(lastWord.word) : null;
 
-  // dentro del componente, con los otros estados:
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // nuevo useEffect después de los otros:
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [words]);
 
-  // TEST
   useEffect(() => {
-    const testWords: WordEntry[] = [
-      { word: "casa", points: 4, colorIndex: 0 },
-      { word: "árbol", points: 5, colorIndex: 1 },
-      { word: "luna", points: 4, colorIndex: 2 },
-      { word: "andar", points: 5, colorIndex: 3 },
-      { word: "reloj", points: 5, colorIndex: 4 },
-      { word: "jardín", points: 6, colorIndex: 0 },
-      { word: "noche", points: 5, colorIndex: 1 },
-      { word: "estrella", points: 8, colorIndex: 2 },
-      { word: "ambiente", points: 8, colorIndex: 3 },
-      { word: "elefante", points: 8, colorIndex: 4 },
-      { word: "estufa", points: 6, colorIndex: 0 },
-      { word: "abismo", points: 6, colorIndex: 1 },
-      { word: "otoño", points: 5, colorIndex: 2 },
-      { word: "orquesta", points: 8, colorIndex: 3 },
-      { word: "aguacate", points: 8, colorIndex: 4 },
-      { word: "eclipse", points: 7, colorIndex: 0 },
-      { word: "espejo", points: 6, colorIndex: 1 },
-      { word: "océano", points: 6, colorIndex: 2 },
-      { word: "olivo", points: 5, colorIndex: 3 },
-      { word: "oveja", points: 5, colorIndex: 4 },
-      { word: "azúcar", points: 6, colorIndex: 0 },
-      { word: "rincón", points: 6, colorIndex: 1 },
-      { word: "nube", points: 4, colorIndex: 2 },
-      { word: "espada", points: 6, colorIndex: 3 },
-      { word: "alacran", points: 6, colorIndex: 4 },
-      { word: "narrar", points: 6, colorIndex: 0 },
-      { word: "rodar", points: 6, colorIndex: 1 },
-      { word: "ruido", points: 6, colorIndex: 2 },
-      { word: "oir", points: 6, colorIndex: 3 },
-    ];
-    setWords(testWords);
-    setScore(testWords.reduce((acc, w) => acc + w.points, 0));
-    setColorIndex(testWords.length % 5);
-  }, []);
+    if (!finished && !loading) {
+      inputRef.current?.focus();
+    }
+  }, [finished, loading]);
 
   const handleExpire = useCallback(() => {
     setFinished(true);
     onGameEnd(score, words.length);
-    navigate("/result", {
+    navigate("/", {
       state: { score, wordCount: words.length, playerName },
     });
   }, [score, words.length, playerName, onGameEnd, navigate]);
 
   const { timeLeft, resetTimer, totalSeconds } = useGameTimer({
     onExpire: handleExpire,
-    enabled: false, //!finished,
+    enabled: !finished,
   });
 
   const handleSubmit = useCallback(async () => {
@@ -107,7 +74,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
 
     setLoading(true);
     try {
-      const exists = true; //await validateWord(word);
+      const exists = await validateWord(word);
       if (!exists) {
         setError("Esa palabra no existe en el diccionario.");
         return;
@@ -131,15 +98,19 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
   return (
     <div className="flex flex-col flex-1 overflow-hidden m-4">
       <header className="px-2 flex justify-end items-center gap-4">
-        <span className="text-sm hidden sm:block text-muted">{playerName.toUpperCase()}</span>
-        <div className="rounded-lg px-3 py-1 text-base font-medium border border-sun text-sun">
+        <span className="text-sm sm:block text-muted">{playerName}</span>
+        <div className="rounded-lg px-3 text-base font-medium border border-sun text-sun">
           {score} pts
         </div>
       </header>
 
       <TimerBar timeLeft={timeLeft} total={totalSeconds} />
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-6 py-6">
+      <div
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto px-6 py-6 bg-card2 border border-border2 rounded-lg"
+      >
+        {" "}
         {words.length === 0 ? (
           <p className="text-sm text-muted">
             Ingresá la primera palabra para empezar — Puede ser cualquier
@@ -150,13 +121,13 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
         )}
       </div>
 
-      <div className="shrink-0 px-6 py-6 flex flex-col gap-3 border-t border-border">
+      <div className="shrink-0 px-6 py-4 flex flex-col gap-3 border-t border-border">
         {words.length > 0 && (
           <div className="flex items-center gap-3 rounded-xl px-4 py-3 bg-cyan/10 border border-cyan/30">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center text-lg font-medium shrink-0 bg-cyan text-navy">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-medium shrink-0 bg-cyan text-navy">
               {requiredLetter?.toUpperCase()}
             </div>
-            <span className="text-sm text-white/80">
+            <span className="text-base text-gray-300">
               La siguiente palabra empieza con{" "}
               <strong className="text-cyan">
                 {requiredLetter?.toUpperCase()}
@@ -172,6 +143,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
           disabled={finished}
           loading={loading}
           error={error}
+          inputRef={inputRef}
         />
       </div>
     </div>
