@@ -49,7 +49,7 @@ export function MenuPage({ playerName, onNameChange }: MenuPageProps) {
 
         <div className="flex flex-col gap-2 sm:gap-3">
           <button
-            className="w-full h-10 sm:h-12 rounded-xl text-sm sm:text-base font-medium bg-sun text-navy hover:opacity-90 active:scale-[0.98] transition-all"
+            className="btn-base btn-sun w-full h-10 sm:h-12 rounded-xl text-sm sm:text-base font-medium mb-4"
             onClick={handlePlay}
           >
             Nueva partida
@@ -57,7 +57,7 @@ export function MenuPage({ playerName, onNameChange }: MenuPageProps) {
           <div className="grid grid-cols-2 gap-2 sm:gap-3">
             <button
               className="h-9 sm:h-11 bg-transparent border border-border2 rounded-xl text-xs sm:text-sm text-white hover:bg-card2 transition-colors"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/game")}
             >
               Instrucciones
             </button>
