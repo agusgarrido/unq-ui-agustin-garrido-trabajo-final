@@ -6,6 +6,7 @@ interface WordInputProps {
   disabled?: boolean;
   loading?: boolean;
   error: string | null;
+  inputRef?: React.RefObject<HTMLInputElement | null>
 }
 
 export function WordInput({
@@ -16,6 +17,7 @@ export function WordInput({
   disabled,
   loading,
   error,
+  inputRef
 }: WordInputProps) {
   const handleKey = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") onSubmit();
@@ -36,6 +38,7 @@ export function WordInput({
           autoCapitalize="none"
           spellCheck={false}
           aria-label="Ingresá una palabra"
+          ref={inputRef}
         />
         {requiredLetter && (
           <div className="w-12 h-12 bg-cyan rounded-lg flex items-center justify-center text-2xl font-medium text-black shrink-0">
