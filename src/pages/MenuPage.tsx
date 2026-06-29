@@ -3,21 +3,24 @@ import { useState } from "react";
 import { Logo } from "../components/ui/Logo";
 
 interface MenuPageProps {
-  playerName: string;
-  onNameChange: (name: string) => void;
+  playerName: string
+  onNameChange: (name: string) => void
+  onPlay: () => void
 }
 
-export function MenuPage({ playerName, onNameChange }: MenuPageProps) {
+export function MenuPage({ playerName, onNameChange, onPlay}: MenuPageProps) {
   const navigate = useNavigate();
   const [name, setName] = useState(playerName);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
     onNameChange(e.target.value);
+    
   };
 
   const handlePlay = () => {
     onNameChange(name.trim() || "Anónimo");
+    onPlay();
     navigate("/game");
   };
 
@@ -57,7 +60,7 @@ export function MenuPage({ playerName, onNameChange }: MenuPageProps) {
           <div className="grid grid-cols-2 gap-2 sm:gap-3">
             <button
               className="h-9 sm:h-11 bg-transparent border border-border2 rounded-xl text-xs sm:text-sm text-white hover:bg-card2 transition-colors"
-              onClick={() => navigate("/game")}
+              onClick={() => navigate("/")}
             >
               Instrucciones
             </button>
