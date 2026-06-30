@@ -3,10 +3,11 @@ import { useState } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import { MenuPage } from "../pages/MenuPage";
 import { GamePage } from "../pages/GamePage";
+import { ResultPage } from "../pages/ResultPage";
 
 export function AppRouter() {
   const [playerName, setPlayerName] = useState("Anónimo");
-  const [hasStarted, setHasStarted] = useState(false)
+  const [hasStarted, setHasStarted] = useState(false);
 
   return (
     <BrowserRouter>
@@ -15,7 +16,11 @@ export function AppRouter() {
           <Route
             path="/"
             element={
-              <MenuPage playerName={playerName} onNameChange={setPlayerName} onPlay={() => setHasStarted(true)}/>
+              <MenuPage
+                playerName={playerName}
+                onNameChange={setPlayerName}
+                onPlay={() => setHasStarted(true)}
+              />
             }
           />
         </Route>
@@ -31,7 +36,10 @@ export function AppRouter() {
               )
             }
           />
-          <Route path="/result" element={<div>Result</div>} />
+          <Route
+            path="/result"
+            element={hasStarted ? <ResultPage /> : <Navigate to="/" replace />}
+          />
           <Route path="/instructions" element={<div>Instructions</div>} />
           <Route path="/leaderboard" element={<div>Leaderboard</div>} />
         </Route>
