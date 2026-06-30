@@ -45,7 +45,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
   const handleExpire = useCallback(() => {
     setFinished(true);
     onGameEnd(score, words.length);
-    navigate("/", {
+    navigate("/result", {
       state: { score, wordCount: words.length, playerName },
     });
   }, [score, words.length, playerName, onGameEnd, navigate]);

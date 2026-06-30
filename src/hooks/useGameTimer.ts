@@ -33,7 +33,6 @@ export function useGameTimer({ onExpire, enabled, speed = 1000 }: UseGameTimerOp
       setTimeLeft(prev => {
         if (prev <= 1) {
           clearTimer()
-          onExpireRef.current()
           return 0
         }
         return prev - 1
@@ -42,6 +41,12 @@ export function useGameTimer({ onExpire, enabled, speed = 1000 }: UseGameTimerOp
 
     return clearTimer
   }, [enabled, clearTimer, speed])
+
+  useEffect(() => {
+    if (timeLeft === 0 && enabled) {
+      onExpireRef.current()
+    }
+  }, [timeLeft, enabled])
 
   return { timeLeft, resetTimer, totalSeconds: TURN_SECONDS }
 }
