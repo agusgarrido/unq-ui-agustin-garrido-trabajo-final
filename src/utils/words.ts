@@ -16,3 +16,7 @@ export function firstLetter(word: string): string {
 export function wordPoints(word: string): number {
   return word.trim().length
 }
+
+export function pluralizeWord(count: number): string {
+  return count === 1 ? 'palabra' : 'palabras'
+}
