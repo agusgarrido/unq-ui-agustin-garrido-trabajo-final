@@ -4,10 +4,21 @@ import MainLayout from "../components/layout/MainLayout";
 import { MenuPage } from "../pages/MenuPage";
 import { GamePage } from "../pages/GamePage";
 import { ResultPage } from "../pages/ResultPage";
+import { LeaderboardPage } from "../pages/LeaderboardPage";
+import { saveEntry } from "../utils/leaderboard";
 
 export function AppRouter() {
   const [playerName, setPlayerName] = useState("Anónimo");
   const [hasStarted, setHasStarted] = useState(false);
+
+const handleGameEnd = (score: number, wordCount: number) => {
+  saveEntry({
+    name: playerName,
+    score,
+    wordCount,
+    date: new Date().toISOString(),
+  })
+}
 
   return (
     <BrowserRouter>
@@ -30,7 +41,7 @@ export function AppRouter() {
             path="/game"
             element={
               hasStarted ? (
-                <GamePage playerName={playerName} onGameEnd={() => {}} />
+                <GamePage playerName={playerName} onGameEnd={handleGameEnd} />
               ) : (
                 <Navigate to="/" replace />
               )
@@ -41,7 +52,7 @@ export function AppRouter() {
             element={hasStarted ? <ResultPage /> : <Navigate to="/" replace />}
           />
           <Route path="/instructions" element={<div>Instructions</div>} />
-          <Route path="/leaderboard" element={<div>Leaderboard</div>} />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

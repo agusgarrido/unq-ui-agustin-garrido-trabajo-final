@@ -66,7 +66,7 @@ export function MenuPage({ playerName, onNameChange, onPlay}: MenuPageProps) {
             </button>
             <button
               className="h-9 sm:h-11 bg-transparent border border-border2 rounded-xl text-xs sm:text-sm text-white hover:bg-card2 transition-colors"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/leaderboard")}
             >
               Historial
             </button>
