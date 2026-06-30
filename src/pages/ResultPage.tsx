@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Logo } from "../components/ui/Logo";
+import { pluralizeWord } from "../utils/words";
 
 interface ResultState {
   score: number;
@@ -36,7 +37,7 @@ export function ResultPage() {
           <div className="bg-card2 border border-border rounded-xl p-5 flex flex-col gap-1 items-center justify-center">
             <span className="text-4xl font-medium text-cyan">{wordCount}</span>
             <span className="text-xs text-muted uppercase tracking-widest">
-              {wordCount === 1 ? "palabra" : "palabras"}
+              {wordCount} {pluralizeWord(wordCount)}
             </span>
           </div>
         </div>

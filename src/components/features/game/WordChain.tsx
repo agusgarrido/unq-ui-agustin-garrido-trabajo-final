@@ -1,5 +1,6 @@
 import { LetterTile } from "../../ui/LetterTile";
 import type { WordEntry } from "../../../types/game";
+import { pluralizeWord } from "../../../utils/words";
 
 interface WordChainProps {
   words: WordEntry[];
@@ -11,7 +12,7 @@ export function WordChain({ words }: WordChainProps) {
   return (
     <div className="mb-5">
       <div className="text-xs text-muted uppercase tracking-widest mb-2">
-        tu cadena — {words.length} {words.length === 1 ? "palabra" : "palabras"}
+        tu cadena — {words.length} {pluralizeWord(words.length)}
       </div>
       <div className="flex flex-wrap gap-2 items-end">
         {words.map((entry, wi) => {
