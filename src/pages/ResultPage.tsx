@@ -37,7 +37,7 @@ export function ResultPage() {
           <div className="bg-card2 border border-border rounded-xl p-5 flex flex-col gap-1 items-center justify-center">
             <span className="text-4xl font-medium text-cyan">{wordCount}</span>
             <span className="text-xs text-muted uppercase tracking-widest">
-              {wordCount} {pluralizeWord(wordCount)}
+              {pluralizeWord(wordCount)}
             </span>
           </div>
         </div>
