@@ -4,6 +4,7 @@ import MainLayout from "../components/layout/MainLayout";
 import { MenuPage } from "../pages/MenuPage";
 import { GamePage } from "../pages/GamePage";
 import { ResultPage } from "../pages/ResultPage";
+import { InstructionsPage } from "../pages/InstructionPage";
 
 export function AppRouter() {
   const [playerName, setPlayerName] = useState("Anónimo");
@@ -40,7 +41,7 @@ export function AppRouter() {
             path="/result"
             element={hasStarted ? <ResultPage /> : <Navigate to="/" replace />}
           />
-          <Route path="/instructions" element={<div>Instructions</div>} />
+          <Route path="/instructions" element={<InstructionsPage />} />
           <Route path="/leaderboard" element={<div>Leaderboard</div>} />
         </Route>
       </Routes>
