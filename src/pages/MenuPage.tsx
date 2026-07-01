@@ -60,7 +60,7 @@ export function MenuPage({ playerName, onNameChange, onPlay}: MenuPageProps) {
           <div className="grid grid-cols-2 gap-2 sm:gap-3">
             <button
               className="h-9 sm:h-11 bg-transparent border border-border2 rounded-xl text-xs sm:text-sm text-white hover:bg-card2 transition-colors"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/instructions")}
             >
               Instrucciones
             </button>

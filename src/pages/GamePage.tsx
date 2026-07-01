@@ -112,7 +112,6 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
         ref={scrollRef}
         className="flex-1 overflow-y-auto px-6 py-6 bg-card2 border border-border2 rounded-lg"
       >
-        {" "}
         {words.length === 0 ? (
           <p className="text-sm text-muted">
             Ingresá la primera palabra para empezar — Puede ser cualquier

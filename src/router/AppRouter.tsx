@@ -6,6 +6,7 @@ import { GamePage } from "../pages/GamePage";
 import { ResultPage } from "../pages/ResultPage";
 import { LeaderboardPage } from "../pages/LeaderboardPage";
 import { saveEntry } from "../utils/leaderboard";
+import { InstructionsPage } from "../pages/InstructionPage";
 
 export function AppRouter() {
   const [playerName, setPlayerName] = useState("Anónimo");
@@ -51,8 +52,8 @@ const handleGameEnd = (score: number, wordCount: number) => {
             path="/result"
             element={hasStarted ? <ResultPage /> : <Navigate to="/" replace />}
           />
-          <Route path="/instructions" element={<div>Instructions</div>} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/instructions" element={<InstructionsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
