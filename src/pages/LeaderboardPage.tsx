@@ -32,7 +32,7 @@ export function LeaderboardPage() {
                             {entries.map((entry, i) => (
                                 <div
                                     key={i}
-                                    className="flex items-center gap-3 px-4 py-2 border-b border-border"
+                                    className="flex items-center gap-3 px-4 py-2 border-b border-border last:border-b-0"
                                 >
                                     <span className="text-lg font-medium text-sun w-6 shrink-0">#{i + 1}</span>
                                     <div className="flex-1 min-w-0">

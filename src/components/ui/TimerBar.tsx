@@ -19,7 +19,7 @@ export function TimerBar({ timeLeft, total }: TimerBarProps) {
         <div className="h-2.5 rounded-full overflow-hidden bg-border">
           <div
             className={`h-full rounded-full transition-colors duration-500 ${urgent ? 'bg-rust' : 'bg-sun'}`}
-            style={{ width: `${percentage }%` }}
+            style={{ width: `${percentage}%` }}
           />
         </div>
       </div>
