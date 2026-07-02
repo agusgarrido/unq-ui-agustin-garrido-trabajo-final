@@ -6,7 +6,7 @@ export function normalize(str: string): string {
 }
 
 export function lastLetter(word: string): string {
-  return word.trim().slice(-1)
+  return normalize(word.trim().slice(-1))
 }
 
 export function firstLetter(word: string): string {
