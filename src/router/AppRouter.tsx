@@ -18,8 +18,8 @@ export function AppRouter() {
       score,
       wordCount,
       date: new Date().toISOString(),
-    })
-  }
+    });
+  };
 
   return (
     <BrowserRouter>
@@ -50,7 +50,13 @@ export function AppRouter() {
           />
           <Route
             path="/result"
-            element={hasStarted ? <ResultPage /> : <Navigate to="/" replace />}
+            element={
+              hasStarted ? (
+                <ResultPage onReset={() => setHasStarted(false)} />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
           />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/instructions" element={<InstructionsPage />} />

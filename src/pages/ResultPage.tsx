@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate } from "react-router-dom"; // Agregamos Navigate
 import { Logo } from "../components/ui/Logo";
 import { pluralizeWord } from "../utils/words";
 
@@ -8,13 +8,21 @@ interface ResultState {
   playerName: string;
 }
 
-export function ResultPage() {
+interface ResultPageProps {
+  onReset: () => void;
+}
+
+export function ResultPage({ onReset }: ResultPageProps) {
   const navigate = useNavigate();
   const { state } = useLocation() as { state: ResultState | null };
 
-  if (!state) {
+  const handleBackToMenu = () => {
+    onReset();
     navigate("/");
-    return null;
+  };
+
+  if (!state) {
+    return <Navigate to="/" replace />;
   }
 
   const { score, wordCount, playerName } = state;
@@ -51,7 +59,7 @@ export function ResultPage() {
           </button>
           <button
             className="btn-base w-full h-11 rounded-xl text-sm text-white bg-transparent border border-border2 hover:bg-card2 transition-colors"
-            onClick={() => navigate("/")}
+            onClick={handleBackToMenu}
           >
             Volver al inicio
           </button>

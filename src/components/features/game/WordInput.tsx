@@ -27,7 +27,11 @@ export function WordInput({
     <div className="flex flex-col gap-3">
       <div className="flex gap-2 items-center">
         <input
-          className="flex-1 min-w-0 bg-card2 border border-border2 rounded-lg text-white text-lg font-medium h-12 px-4 outline-none focus:border-cyan transition-colors placeholder:text-muted placeholder:text-sm placeholder:font-normal disabled:opacity-50"
+          className={`flex-1 min-w-0 bg-card2 border rounded-lg text-white text-lg font-medium h-12 px-4 outline-none transition-colors placeholder:text-muted placeholder:text-sm placeholder:font-normal disabled:opacity-50
+    ${error
+              ? 'border-rust/40 focus:border-rust/40'
+              : 'border-border2 focus:border-cyan'
+            }`}
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}

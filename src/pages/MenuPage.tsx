@@ -8,18 +8,17 @@ interface MenuPageProps {
   onPlay: () => void
 }
 
-export function MenuPage({ playerName, onNameChange, onPlay}: MenuPageProps) {
+export function MenuPage({ playerName, onNameChange, onPlay }: MenuPageProps) {
   const navigate = useNavigate();
   const [name, setName] = useState(playerName);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
-    onNameChange(e.target.value);
-    
   };
 
   const handlePlay = () => {
-    onNameChange(name.trim() || "Anónimo");
+    const finalName = name.trim() || "Anónimo";
+    onNameChange(finalName);
     onPlay();
     navigate("/game");
   };

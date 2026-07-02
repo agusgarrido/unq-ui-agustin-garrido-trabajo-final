@@ -58,10 +58,12 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
 
   const handleSubmit = useCallback(async () => {
     const word = input.trim().toLowerCase();
-    if (!word) return;
+    if (!word || loading) return;
+
     setError(null);
 
-    if (words.some((w) => normalize(w.word) === normalize(word))) {
+    const isDuplicate = words.some((w) => normalize(w.word) === normalize(word));
+    if (isDuplicate) {
       setError("Esa palabra ya fue usada, intentá otra.");
       return;
     }
@@ -75,27 +77,27 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
     }
 
     setLoading(true);
+
     try {
       const exists = await validateWord(word);
       if (!exists) {
         setError("Esa palabra no existe en el diccionario.");
         return;
       }
+
+      const pts = wordPoints(word);
+      setWords((prev) => [...prev, { word, points: pts, colorIndex }]);
+      setScore((prev) => prev + pts);
+      setColorIndex((prev) => (prev + 1) % 5);
+      setInput("");
+      resetTimer();
+
     } catch {
       setError("No se pudo verificar la palabra — Revisá tu conexión.");
-      return;
     } finally {
       setLoading(false);
     }
-
-    const pts = wordPoints(word);
-    setWords((prev) => [...prev, { word, points: pts, colorIndex }]);
-    setScore((prev) => prev + pts);
-    setColorIndex((prev) => (prev + 1) % 5);
-    setInput("");
-    setError(null);
-    resetTimer();
-  }, [input, words, requiredLetter, colorIndex, resetTimer]);
+  }, [input, loading, words, requiredLetter, colorIndex, resetTimer]);
 
   return (
     <div className="flex flex-col flex-1 overflow-hidden m-4">
