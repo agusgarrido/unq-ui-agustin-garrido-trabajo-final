@@ -12,14 +12,14 @@ export function AppRouter() {
   const [playerName, setPlayerName] = useState("Anónimo");
   const [hasStarted, setHasStarted] = useState(false);
 
-const handleGameEnd = (score: number, wordCount: number) => {
-  saveEntry({
-    name: playerName,
-    score,
-    wordCount,
-    date: new Date().toISOString(),
-  })
-}
+  const handleGameEnd = (score: number, wordCount: number) => {
+    saveEntry({
+      name: playerName,
+      score,
+      wordCount,
+      date: new Date().toISOString(),
+    })
+  }
 
   return (
     <BrowserRouter>
@@ -54,6 +54,7 @@ const handleGameEnd = (score: number, wordCount: number) => {
           />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/instructions" element={<InstructionsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>
