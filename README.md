@@ -22,7 +22,7 @@ Formá la cadena más larga posible de palabras válidas antes de que se acabe e
 ## Requisitos previos
 
 El proyecto fue desarrollado y testeado utilizando:
-- **Node.js:** v20.x o superior
+- **Node.js:** v20.19.0 o superior (recomendado: v22)
 - **Gestor de paquetes:** npm
 
 ## Instalación
