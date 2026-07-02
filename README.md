@@ -19,6 +19,12 @@ Formá la cadena más larga posible de palabras válidas antes de que se acabe e
 - Leaderboard local con las mejores 10 partidas guardadas en el navegador.
 - Posibilidad de jugar múltiples partidas consecutivas.
 
+## Requisitos previos
+
+El proyecto fue desarrollado y testeado utilizando:
+- **Node.js:** v20.x o superior
+- **Gestor de paquetes:** npm
+
 ## Instalación
 
 ```bash
