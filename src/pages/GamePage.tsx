@@ -52,7 +52,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
 
   const { timeLeft, resetTimer, totalSeconds } = useGameTimer({
     onExpire: handleExpire,
-    enabled: !finished,
+    enabled: !finished && words.length > 0,
     speed: timerSpeed
   });
 
@@ -114,8 +114,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
       >
         {words.length === 0 ? (
           <p className="text-sm text-muted">
-            Ingresá la primera palabra para empezar — Puede ser cualquier
-            palabra válida.
+            Ingresá una palabra válida para empezar — El timer arranca con tu primera jugada.
           </p>
         ) : (
           <WordChain words={words} />
