@@ -92,7 +92,7 @@ export function GamePage({ playerName, onGameEnd }: GamePageProps) {
       setInput("");
       resetTimer();
 
-    } catch (error){
+    } catch (err){
       setError("¡Oh no! Ocurrió un error al validar la palabra - Por favor, inténtalo de nuevo más tarde.");
     } finally {
       setLoading(false);
